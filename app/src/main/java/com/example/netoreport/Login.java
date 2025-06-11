@@ -36,10 +36,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);
 
-        // Verificar e solicitar permissões
         checkAndRequestPermissions();
 
-        // Inicializar o banco de dados
         dbHelper = new Banco(this);
 
         // Vincular os elementos da interface
@@ -48,7 +46,6 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.Btn_Login);
         btnCadastro = findViewById(R.id.Btn_Cadastro);
 
-        // Configurar o clique do botão Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +53,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        // Configurar o clique do botão Cadastro
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

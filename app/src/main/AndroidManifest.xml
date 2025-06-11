@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Permissões necessárias para a câmera -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -37,7 +36,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCCafdZ_GvhIGU1Xi5m8ZBjq02IiqCnyFI" />
 
-        <!-- Tela principal (Login) -->
         <activity
             android:name=".Login"
             android:exported="true">
@@ -47,10 +45,8 @@
             </intent-filter>
         </activity>
 
-        <!-- Tela de Cadastro -->
         <activity android:name=".Cadastro" />
 
-        <!-- Tela de Reportar Problemas -->
         <activity android:name=".Problemas" />
         <activity android:name=".MainActivity"
             android:exported="true">
@@ -59,10 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Tela de Categorias (se necessário) -->
-        <!-- <activity android:name=".CategoriasActivity" /> -->
 
-        <!-- Provider para armazenamento de fotos (opcional) -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

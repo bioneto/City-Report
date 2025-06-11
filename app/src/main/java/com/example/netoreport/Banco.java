@@ -10,20 +10,17 @@ public class Banco extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "netoreport.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Tabela Usuários
     public static final String TABLE_USUARIOS = "usuarios";
     public static final String COLUMN_USUARIO_ID = "id";
     public static final String COLUMN_USUARIO_NOME = "nome";
     public static final String COLUMN_USUARIO_EMAIL = "email";
     public static final String COLUMN_USUARIO_SENHA = "senha";
 
-    // Tabela Categorias
     public static final String TABLE_CATEGORIAS = "categorias";
     public static final String COLUMN_CATEGORIA_ID = "id";
     public static final String COLUMN_CATEGORIA_NOME = "nome";
     public static final String COLUMN_CATEGORIA_DESCRICAO = "descricao";
 
-    // Tabela Problemas (corrigido de Protilemas)
     public static final String TABLE_PROBLEMAS = "problemas";
     public static final String COLUMN_PROBLEMA_ID = "id";
     public static final String COLUMN_PROBLEMA_CATEGORIA_ID = "categoria_id";
@@ -35,7 +32,6 @@ public class Banco extends SQLiteOpenHelper {
     public static final String COLUMN_PROBLEMA_DATA_HORA = "data_hora";
     public static final String COLUMN_PROBLEMA_STATUS = "status";
 
-    // SQL de criação das tabelas
     private static final String CREATE_TABLE_USUARIOS =
             "CREATE TABLE " + TABLE_USUARIOS + "(" +
                     COLUMN_USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -78,7 +74,6 @@ public class Banco extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_CATEGORIAS);
         db.execSQL(CREATE_TABLE_PROBLEMAS);
 
-        // Inserir categorias padrão
         inserirCategoriasIniciais(db);
     }
 
@@ -107,7 +102,6 @@ public class Banco extends SQLiteOpenHelper {
         }
     }
 
-    // Métodos para operações com usuários
     public long cadastrarUsuario(String nome, String email, String senha) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -132,7 +126,6 @@ public class Banco extends SQLiteOpenHelper {
         return existe;
     }
 
-    // Métodos para operações com problemas
     public long cadastrarProblema(int categoriaId, int usuarioId, String descricao,
                                   byte[] foto, double latitude, double longitude,
                                   String dataHora, String status) {
@@ -153,7 +146,7 @@ public class Banco extends SQLiteOpenHelper {
         return id;
     }
 
-    // Métodos para operações com categorias
+
     public Cursor getTodasCategorias() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query(TABLE_CATEGORIAS,

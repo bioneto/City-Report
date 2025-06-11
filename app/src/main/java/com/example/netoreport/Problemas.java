@@ -57,14 +57,12 @@ public class Problemas extends AppCompatActivity {
         usuarioId = getIntent().getIntExtra("USUARIO_ID", -1);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Inicializar views
         spinnerCategorias = findViewById(R.id.spinnerCategorias);
         editDescricao = findViewById(R.id.Campo_Descricao);
         btnFoto = findViewById(R.id.Btn_foto);
         btnReportar = findViewById(R.id.Btn_Reportar);
         imageViewFoto = findViewById(R.id.imageViewFoto);
 
-        // Carregar categorias no Spinner
         carregarCategorias();
 
         btnFoto.setOnClickListener(v -> verificarPermissaoCamera());
@@ -141,7 +139,6 @@ public class Problemas extends AppCompatActivity {
         }
     }
 
-    // Restante dos métodos permanecem inalterados...
     private void carregarCategorias() {
         Cursor cursor = dbHelper.getTodasCategorias();
         List<String> categorias = new ArrayList<>();

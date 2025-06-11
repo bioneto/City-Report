@@ -48,7 +48,6 @@ public class ProblemaAdapter extends RecyclerView.Adapter<ProblemaAdapter.Proble
     public void onBindViewHolder(@NonNull ProblemaViewHolder holder, int position) {
         Problema problema = problemasList.get(position);
 
-        // Configurar imagem do problema
         try {
             if (problema.getFoto() != null && problema.getFoto().length > 0) {
                 Bitmap bitmap = BitmapFactory.decodeByteArray(

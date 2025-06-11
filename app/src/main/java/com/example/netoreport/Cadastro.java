@@ -18,10 +18,8 @@ public class Cadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cadastro_main);
 
-        // Inicializar o banco de dados
         dbHelper = new Banco(this);
 
-        // Vincular os elementos da interface
         editNome = findViewById(R.id.Campo_Cadastrar_Nome);
         editEmail = findViewById(R.id.Campo_Cadastrar_Email);
         editSenha = findViewById(R.id.Campo_Cadastro_Senha);
@@ -29,7 +27,6 @@ public class Cadastro extends AppCompatActivity {
         btnCadastrar = findViewById(R.id.Btn_Cadastrar);
         btnVoltar = findViewById(R.id.Btn_voltar_Cadastro);
 
-        // Configurar o clique do botão Cadastrar
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,11 +34,10 @@ public class Cadastro extends AppCompatActivity {
             }
         });
 
-        // Configurar o clique do botão Voltar
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Fecha a activity atual e volta para a anterior
+                finish();
             }
         });
     }
@@ -52,7 +48,6 @@ public class Cadastro extends AppCompatActivity {
         String senha = editSenha.getText().toString().trim();
         String confirmarSenha = editConfirmarSenha.getText().toString().trim();
 
-        // Validações básicas
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty()) {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
             return;
@@ -68,12 +63,11 @@ public class Cadastro extends AppCompatActivity {
             return;
         }
 
-        // Inserir no banco de dados
         long id = dbHelper.cadastrarUsuario(nome, email, senha);
 
         if (id != -1) {
             Toast.makeText(this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
-            finish(); // Fecha a activity após cadastro bem-sucedido
+            finish();
         } else {
             Toast.makeText(this, "Erro ao cadastrar usuário!", Toast.LENGTH_SHORT).show();
         }
