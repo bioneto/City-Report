@@ -16,14 +16,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class Problemas extends AppCompatActivity {
     private Bitmap fotoBitmap;
     private Banco dbHelper;
     private int usuarioId;
-
+    private NotificationHelper notificationHelper;
     private FusedLocationProviderClient fusedLocationClient;
     private double latitude = 0.0;
     private double longitude = 0.0;
@@ -54,6 +57,7 @@ public class Problemas extends AppCompatActivity {
         setContentView(R.layout.problemas_main);
 
         dbHelper = new Banco(this);
+        notificationHelper = new NotificationHelper(this);
         usuarioId = getIntent().getIntExtra("USUARIO_ID", -1);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -101,7 +105,7 @@ public class Problemas extends AppCompatActivity {
     private void obterLocalizacaoAtual() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            reportarProblema(); // Tenta reportar sem localização
+            reportarProblema();
             return;
         }
 
@@ -145,7 +149,7 @@ public class Problemas extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
-                categorias.add(cursor.getString(1)); // Nome da categoria
+                categorias.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -190,6 +194,11 @@ public class Problemas extends AppCompatActivity {
         );
 
         if (id != -1) {
+            notificationHelper.sendNotification(
+                    "Problema Reportado",
+                    "Problema '" + descricao.substring(0, Math.min(20, descricao.length())) +
+                            (descricao.length() > 20 ? "..." : "") + "' cadastrado!"
+            );
             Toast.makeText(this, "Problema reportado com sucesso!", Toast.LENGTH_LONG).show();
             setResult(RESULT_OK);
             finish();
@@ -200,7 +209,7 @@ public class Problemas extends AppCompatActivity {
 
     private int obterIdCategoria(String nomeCategoria) {
         Cursor cursor = dbHelper.getTodasCategorias();
-        int id = 1; // Default
+        int id = 1;
 
         if (cursor.moveToFirst()) {
             do {

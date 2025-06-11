@@ -12,7 +12,7 @@ public class Problema {
     private String status;
     private String categoriaNome;
 
-    // Getters e Setters
+
     public int getId() {
         return id;
     }

@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 public class ProblemaAdapter extends RecyclerView.Adapter<ProblemaAdapter.ProblemaViewHolder> {
@@ -26,11 +28,13 @@ public class ProblemaAdapter extends RecyclerView.Adapter<ProblemaAdapter.Proble
     private List<Problema> problemasList;
     private Banco dbHelper;
     private OnStatusChangedListener statusChangedListener;
+    private NotificationHelper notificationHelper;
 
     public ProblemaAdapter(Context context, List<Problema> problemasList, Banco dbHelper) {
         this.context = context;
         this.problemasList = problemasList;
         this.dbHelper = dbHelper;
+        this.notificationHelper = new NotificationHelper(context);
     }
 
     public void setOnStatusChangedListener(OnStatusChangedListener listener) {
@@ -120,10 +124,18 @@ public class ProblemaAdapter extends RecyclerView.Adapter<ProblemaAdapter.Proble
                     new String[]{String.valueOf(problemaId)});
             problemasList.remove(position);
             notifyItemRemoved(position);
+            notificationHelper.sendNotification(
+                    "Problema Resolvido",
+                    "Um problema foi marcado como resolvido"
+            );
             Toast.makeText(context, "Problema resolvido e removido", Toast.LENGTH_SHORT).show();
         } else {
             db.update(Banco.TABLE_PROBLEMAS, values, Banco.COLUMN_PROBLEMA_ID + " = ?",
                     new String[]{String.valueOf(problemaId)});
+            notificationHelper.sendNotification(
+                    "Status Atualizado",
+                    "Status alterado para: " + novoStatus
+            );
             Toast.makeText(context, "Status atualizado para " + novoStatus, Toast.LENGTH_SHORT).show();
         }
     }

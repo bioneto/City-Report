@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
 
         dbHelper = new Banco(this);
 
-        // Vincular os elementos da interface
         editEmail = findViewById(R.id.Campo_Email);
         editSenha = findViewById(R.id.Campo_Senha);
         btnLogin = findViewById(R.id.Btn_Login);

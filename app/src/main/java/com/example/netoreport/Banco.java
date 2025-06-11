@@ -168,7 +168,7 @@ public class Banco extends SQLiteOpenHelper {
         cursor.close();
         return id;
     }
-    // Banco.java
+
     public Cursor getTodosProblemasComCategoriaEFoto() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT p.*, c." + COLUMN_CATEGORIA_NOME +
