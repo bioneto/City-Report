@@ -34,7 +34,7 @@
         >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCCafdZ_GvhIGU1Xi5m8ZBjq02IiqCnyFI" />
+            android:value="Insira_o_codigo_da_api_do_google_maps_aqui" />
 
         <activity
             android:name=".Login"
