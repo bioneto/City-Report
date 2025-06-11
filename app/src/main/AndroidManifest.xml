@@ -32,7 +32,7 @@
         android:theme="@style/Theme.NetoReport"
         tools:targetApi="31"
         >
-        <meta-data
+        <meta-data        
             android:name="com.google.android.geo.API_KEY"
             android:value="Insira_o_codigo_da_api_do_google_maps_aqui" />
 
